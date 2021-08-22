@@ -1,6 +1,25 @@
 # dqn
 A PyTorch implementation of the DQN algorithm with the Double DQN (DDQN) improvement.
 
+## Usage
+```
+import gym
+from torch import nn
+
+
+env = gym.wrappers.Monitor(gym.make("LunarLander-v2"), "./monitor/", force=True)
+model = nn.Sequential(
+    nn.Linear(env.observation_space.shape[0], 64),
+    nn.ReLU(),
+    nn.Linear(64, 32),
+    nn.ReLU(),
+    nn.Linear(32, env.action_space.n),
+)
+
+dqn = DQN(env, model)
+dqn.learn(n_episodes=300)
+```
+
 ## Demo
 ### [Cart Pole](https://gym.openai.com/envs/CartPole-v1/)
 ![](https://media0.giphy.com/media/R5gyLTlMjHGeCkbBEI/giphy.gif)
