@@ -1,6 +1,13 @@
 # dqn
 A PyTorch implementation of the DQN algorithm with the Double DQN (DDQN) improvement.
 
+## Demos
+### [Cart Pole](https://gym.openai.com/envs/CartPole-v1/)
+![](demo/cart_pole.mp4)
+
+### [Lunar Landing](https://gym.openai.com/envs/LunarLander-v2/)
+![](demo/lunar_landing.mp4)
+
 ## Associated papers
 ```
 @article{mnih_playing_2013,
@@ -33,36 +40,3 @@ A PyTorch implementation of the DQN algorithm with the Double DQN (DDQN) improve
 	file = {arXiv Fulltext PDF:/Users/ryangr/Zotero/storage/Q42ZS9F7/van Hasselt et al. - 2015 - Deep Reinforcement Learning with Double Q-learning.pdf:application/pdf;arXiv.org Snapshot:/Users/ryangr/Zotero/storage/NKNFH2K8/1509.html:text/html},
 }
 ```
-
-```
-@article{schaul_prioritized_2016,
-	title = {Prioritized {Experience} {Replay}},
-	url = {http://arxiv.org/abs/1511.05952},
-	abstract = {Experience replay lets online reinforcement learning agents remember and reuse experiences from the past. In prior work, experience transitions were uniformly sampled from a replay memory. However, this approach simply replays transitions at the same frequency that they were originally experienced, regardless of their significance. In this paper we develop a framework for prioritizing experience, so as to replay important transitions more frequently, and therefore learn more efficiently. We use prioritized experience replay in Deep Q-Networks (DQN), a reinforcement learning algorithm that achieved human-level performance across many Atari games. DQN with prioritized experience replay achieves a new state-of-the-art, outperforming DQN with uniform replay on 41 out of 49 games.},
-	urldate = {2021-08-21},
-	journal = {arXiv:1511.05952 [cs]},
-	author = {Schaul, Tom and Quan, John and Antonoglou, Ioannis and Silver, David},
-	month = feb,
-	year = {2016},
-	note = {arXiv: 1511.05952},
-	keywords = {Computer Science - Machine Learning},
-	file = {arXiv Fulltext PDF:/Users/ryangr/Zotero/storage/QTFUYPGX/Schaul et al. - 2016 - Prioritized Experience Replay.pdf:application/pdf;arXiv.org Snapshot:/Users/ryangr/Zotero/storage/3X5533LB/1511.html:text/html},
-}
-```
-
-```
-@article{fortunato_noisy_2019,
-	title = {Noisy {Networks} for {Exploration}},
-	url = {http://arxiv.org/abs/1706.10295},
-	abstract = {We introduce NoisyNet, a deep reinforcement learning agent with parametric noise added to its weights, and show that the induced stochasticity of the agent's policy can be used to aid efficient exploration. The parameters of the noise are learned with gradient descent along with the remaining network weights. NoisyNet is straightforward to implement and adds little computational overhead. We find that replacing the conventional exploration heuristics for A3C, DQN and dueling agents (entropy reward and \${\textbackslash}epsilon\$-greedy respectively) with NoisyNet yields substantially higher scores for a wide range of Atari games, in some cases advancing the agent from sub to super-human performance.},
-	urldate = {2021-08-21},
-	journal = {arXiv:1706.10295 [cs, stat]},
-	author = {Fortunato, Meire and Azar, Mohammad Gheshlaghi and Piot, Bilal and Menick, Jacob and Osband, Ian and Graves, Alex and Mnih, Vlad and Munos, Remi and Hassabis, Demis and Pietquin, Olivier and Blundell, Charles and Legg, Shane},
-	month = jul,
-	year = {2019},
-	note = {arXiv: 1706.10295},
-	keywords = {Computer Science - Machine Learning, Statistics - Machine Learning},
-	file = {arXiv Fulltext PDF:/Users/ryangr/Zotero/storage/RK6MJ9W6/Fortunato et al. - 2019 - Noisy Networks for Exploration.pdf:application/pdf;arXiv.org Snapshot:/Users/ryangr/Zotero/storage/NC99TQ5T/1706.html:text/html},
-}
-```
-
