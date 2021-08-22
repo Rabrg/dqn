@@ -3,15 +3,13 @@ import numpy as np
 import torch
 import fastprogress
 import math
-from . import UniformReplayMemory
 
 
 class DQN:
     def __init__(
         self,
-        model,
         env,
-        epsilon_greedy_strategy,
+        model,
         replay_memory=UniformReplayMemory(memory_size=50000),
         batch_size=128,
         target_model_update_delay=100,
@@ -22,7 +20,7 @@ class DQN:
     ):
         self.env = env
         self.replay_memory = replay_memory
-        self.epsilon_greedy_strategy = epsilon_greedy_strategy
+        self.epsilon_greedy_strategy = AnnealingEpsilonGreedyStrategy(env)
         self.model = model
         self.update_target_model_weights()
         self.batch_size = batch_size
@@ -37,16 +35,14 @@ class DQN:
         if force_greedy or self.epsilon_greedy_strategy.is_exploit():
             self.model.eval()
             with torch.no_grad():
-                q_value_max = self.model(torch.Tensor(obs).cuda()).max(dim=0)
+                q_value_max = self.model(torch.Tensor(obs)).max(dim=0)
             self.model.train()
             return q_value_max[1].item()
         return self.env.action_space.sample()
 
     def update_model_weights(self):
         batch = self.replay_memory.sample(self.batch_size)
-        batch = {
-            key: torch.stack([b[key] for b in batch]).cuda() for key in batch[0].keys()
-        }
+        batch = {key: torch.stack([b[key] for b in batch]) for key in batch[0].keys()}
 
         q_value = (
             self.model(batch["obs"]).gather(1, batch["action"].unsqueeze(1)).squeeze(1)
