@@ -1,12 +1,12 @@
 # dqn
 A PyTorch implementation of the DQN algorithm with the Double DQN (DDQN) improvement.
 
-## Demos
+## Demo
 ### [Cart Pole](https://gym.openai.com/envs/CartPole-v1/)
-![](demo/cart_pole.mp4)
+![](https://media0.giphy.com/media/R5gyLTlMjHGeCkbBEI/giphy.gif)
 
 ### [Lunar Landing](https://gym.openai.com/envs/LunarLander-v2/)
-![](demo/lunar_landing.mp4)
+![](https://media0.giphy.com/media/X7O4mXxCdw3s75On50/giphy.gif)
 
 ## Associated papers
 ```
