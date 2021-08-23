@@ -3,14 +3,15 @@ import numpy as np
 import torch
 import fastprogress
 import math
-import dqn
+from dqn.replay_memory import UniformReplayMemory
+from dqn.epsilon_greedy_strategy import AnnealingEpsilonGreedyStrategy
 
 class DQN:
     def __init__(
         self,
         env,
         model,
-        replay_memory=dqn.UniformReplayMemory(memory_size=50000),
+        replay_memory=UniformReplayMemory(memory_size=50000),
         batch_size=128,
         target_model_update_delay=100,
         use_ddqn_loss=True,
@@ -20,7 +21,7 @@ class DQN:
     ):
         self.env = env
         self.replay_memory = replay_memory
-        self.epsilon_greedy_strategy = dqn.AnnealingEpsilonGreedyStrategy(env)
+        self.epsilon_greedy_strategy = AnnealingEpsilonGreedyStrategy(env)
         self.model = model
         self.update_target_model_weights()
         self.batch_size = batch_size
