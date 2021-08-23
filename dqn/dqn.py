@@ -6,6 +6,7 @@ import math
 from dqn.replay_memory import UniformReplayMemory
 from dqn.epsilon_greedy_strategy import AnnealingEpsilonGreedyStrategy
 
+
 class DQN:
     def __init__(
         self,
@@ -18,6 +19,8 @@ class DQN:
         gamma=0.99,
         replay_period=1,
         lr=1e-4,
+        plot_update=10,
+        max_episode_steps=108000,
     ):
         self.env = env
         self.replay_memory = replay_memory
@@ -31,6 +34,8 @@ class DQN:
         self.gamma = gamma
         self.replay_period = replay_period
         self.done = True
+        self.plot_update = plot_update
+        self.max_episode_steps = max_episode_steps
 
     def get_action(self, obs, force_greedy=False):
         if force_greedy or self.epsilon_greedy_strategy.is_exploit():
@@ -67,7 +72,6 @@ class DQN:
         for param in self.model.parameters():
             param.grad.data.clamp_(-1, 1)
         self.optimizer.step()
-
         return loss.item()
 
     def update_target_model_weights(self):
@@ -75,19 +79,9 @@ class DQN:
 
     def step(self, obs):
         action = self.get_action(obs)
-        next_obs, reward, done, info = self.env.step(action)
+        next_obs, reward, done, _ = self.env.step(action)
         self.replay_memory.append(obs, action, reward, next_obs, done)
         return next_obs, done
-
-    def plot_reward_update(self, epoch, epochs, mb, reward):
-        x = range(1, epoch + 1)
-        graphs = [[x, reward]]
-        x_margin = 0.2
-        y_margin = 0.05
-        x_bounds = [1 - x_margin, epochs + x_margin]
-        y_bounds = [np.min(reward) - y_margin, np.max(reward) + y_margin]
-
-        mb.update_graph(graphs, x_bounds)
 
     def learn(self, n_episodes=500):
         mb = fastprogress.master_bar(range(1, n_episodes + 1))
@@ -95,23 +89,21 @@ class DQN:
             if self.done:
                 self.obs = self.env.reset()
 
-            for step in range(108000):
+            for step in range(self.max_episode_steps):
                 self.obs, self.done = self.step(self.obs)
-
                 if (
                     len(self.replay_memory) >= self.batch_size
                     and step % self.replay_period == 0
                 ):
                     self.update_model_weights()
-
                 if self.done:
                     break
+
             if episode % self.target_model_update_delay == 0:
                 self.update_target_model_weights()
-            if episode % 10 == 0:
-                self.plot_reward_update(
-                    episode, n_episodes, mb, self.env.get_episode_rewards()
+            if episode % self.plot_update == 0:
+                mb.update_graph(
+                    [[range(1, episode + 1), self.env.get_episode_rewards()]],
+                    [1 - 0.2, n_episodes + 0.2],
                 )
-            if episode >= 10 and np.mean(self.env.get_episode_rewards()[-10:]) >= 490:
-                break
         self.env.close()
