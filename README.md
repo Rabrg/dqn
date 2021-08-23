@@ -27,7 +27,7 @@ dqn.learn(n_episodes=300)
 ### [Lunar Landing](https://gym.openai.com/envs/LunarLander-v2/)
 ![](https://media0.giphy.com/media/X7O4mXxCdw3s75On50/giphy.gif)
 
-## Associated papers
+## Related Work
 ```
 @article{mnih_playing_2013,
 	title = {Playing {Atari} with {Deep} {Reinforcement} {Learning}},
