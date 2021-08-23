@@ -1,4 +1,6 @@
 # dqn
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Rabrg/dqn/blob/main/demo.ipynb)
+
 A PyTorch implementation of the DQN algorithm with the Double DQN (DDQN) improvement.
 
 ## Usage
