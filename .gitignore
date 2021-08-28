@@ -1,3 +1,5 @@
 monitor/
 .DS_Store
 .vscode/
+dqn/__pycache__
+*.pyc
