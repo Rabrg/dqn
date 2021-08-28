@@ -3,6 +3,7 @@ import random
 import torch
 
 
+# TODO: #1 Implement prioritized replay (Schaul et al., 2016)
 class ReplayMemory:
     def __init__(self, memory_size):
         pass
