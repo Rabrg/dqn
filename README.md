@@ -30,7 +30,7 @@ dqn.learn(n_episodes=300)
 ![](https://media0.giphy.com/media/X7O4mXxCdw3s75On50/giphy.gif)
 
 ## Related Work
-```
+```BibTeX
 @article{mnih_playing_2013,
 	title = {Playing {Atari} with {Deep} {Reinforcement} {Learning}},
 	url = {http://arxiv.org/abs/1312.5602},
@@ -46,7 +46,7 @@ dqn.learn(n_episodes=300)
 }
 ```
 
-```
+```BibTeX
 @article{van_hasselt_deep_2015,
 	title = {Deep {Reinforcement} {Learning} with {Double} {Q}-learning},
 	url = {http://arxiv.org/abs/1509.06461},
