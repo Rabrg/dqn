@@ -1,15 +1,15 @@
 # dqn
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Rabrg/dqn/blob/main/demo.ipynb)
 
-A PyTorch implementation of the DQN algorithm with the Double DQN (DDQN) improvement.
+A PyTorch implementation of DeepMind's DQN algorithm with the Double DQN (DDQN) improvement.
 
 ## Usage
-```
+```python
 import gym
 from torch import nn
 
 
-env = gym.wrappers.Monitor(gym.make("LunarLander-v2"), "./monitor/", force=True)
+env = gym.make("LunarLander-v2")
 model = nn.Sequential(
     nn.Linear(env.observation_space.shape[0], 64),
     nn.ReLU(),
