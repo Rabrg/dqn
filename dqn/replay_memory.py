@@ -1,28 +1,43 @@
 from collections import deque
+import numpy as np
 import random
 import torch
 
 
 # TODO: #1 Implement prioritized replay (Schaul et al., 2016)
 class ReplayMemory:
-    def __init__(self, memory_size):
-        pass
+    def __init__(self, memory_size: int):
+        raise NotImplementedError
 
-    def append(self, obs, action, reward, next_obs, done):
-        pass
+    def append(
+        self,
+        obs: np.ndarray,
+        action: int,
+        reward: float,
+        next_obs: np.ndarray,
+        done: bool,
+    ):
+        raise NotImplementedError
 
-    def sample(self, k):
-        pass
+    def sample(self, k) -> dict:
+        raise NotImplementedError
 
-    def __len__(self):
-        pass
+    def __len__(self) -> int:
+        raise NotImplementedError
 
 
 class UniformReplayMemory(ReplayMemory):
-    def __init__(self, memory_size):
+    def __init__(self, memory_size: int):
         self.memories = deque([], memory_size)
 
-    def append(self, obs, action, reward, next_obs, done):
+    def append(
+        self,
+        obs: np.ndarray,
+        action: int,
+        reward: float,
+        next_obs: np.ndarray,
+        done: bool,
+    ):
         self.memories.append(
             {
                 "obs": torch.tensor(obs, dtype=torch.float),
@@ -33,8 +48,8 @@ class UniformReplayMemory(ReplayMemory):
             }
         )
 
-    def sample(self, k):
+    def sample(self, k) -> dict:
         return random.sample(self.memories, k)
 
-    def __len__(self):
+    def __len__(self) -> int:
         return len(self.memories)

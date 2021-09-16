@@ -1,13 +1,14 @@
 import random
 import math
+import gym
 
 
 class EpsilonGreedyStrategy:
     def __init__(self):
-        pass
+        raise NotImplementedError
 
     def is_exploit(self):
-        pass
+        raise NotImplementedError
 
 
 class FixedEpsilonGreedyStrategy(EpsilonGreedyStrategy):
@@ -20,12 +21,16 @@ class FixedEpsilonGreedyStrategy(EpsilonGreedyStrategy):
 
 class AnnealingEpsilonGreedyStrategy(EpsilonGreedyStrategy):
     def __init__(
-        self, env, starting_epsilon=1.0, ending_epsilon=0.05, epsilon_decay=5000
+        self,
+        env: gym.Env,
+        initial_exploration=1.0,
+        final_exploration=0.05,
+        exploration_decay=5000,
     ):
         self.env = env
-        self.starting_epsilon = starting_epsilon
-        self.ending_epsilon = ending_epsilon
-        self.epsilon_decay = epsilon_decay
+        self.starting_epsilon = initial_exploration
+        self.ending_epsilon = final_exploration
+        self.epsilon_decay = exploration_decay
 
     def is_exploit(self):
         random_action_probability = self.ending_epsilon + (
