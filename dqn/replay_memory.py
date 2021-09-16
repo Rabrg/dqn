@@ -26,6 +26,7 @@ class ReplayMemory:
         raise NotImplementedError
 
 
+# TODO: #3 Tensorize the uniform replay memory 
 class UniformReplayMemory(ReplayMemory):
     def __init__(self, memory_size: int):
         self.memories = deque([], memory_size)
